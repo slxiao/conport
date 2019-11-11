@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>contport</title>
+    <script>
+        window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                    text: "build trend",
+                    fontFamily: "Times New Roman",
+                },
+                axisX: {
+                    interval: 1,
+                    valueFormatString: "'#'#0"
+                },
+                axisY: {
+                    valueFormatString: "#0"
+                },
+                data: [
+                    {
+                        type: "stackedColumn",
+                        color: "GREEN",
+                        name: "PASS",
+                        showInLegend: true,
+                        dataPoints: [
+                            
+                        { y: 4, x: 100 },
+        
+                        { y: 4, x: 101 },
+        
+                        { y: 4, x: 102 },
+        
+                        { y: 4, x: 103 },
+        
+                        { y: 3, x: 104 },
+        
+                        { y: 2, x: 105 },
+        
+                        { y: 4, x: 106 },
+        
+                        { y: 1, x: 107 },
+        
+                        { y: 3, x: 108 },
+        
+                        { y: 3, x: 109 },
+        
+                        { y: 4, x: 110 },
+        
+                    ]
+                    }, {
+            type: "stackedColumn",
+                name: "FAIL",
+                    color: "red",
+                        showInLegend: true,
+                            dataPoints: [
+                                
+        { y: 0, x: 100 },
+        
+        { y: 0, x: 101 },
+        
+        { y: 0, x: 102 },
+        
+        { y: 0, x: 103 },
+        
+        { y: 1, x: 104 },
+        
+        { y: 2, x: 105 },
+        
+        { y: 0, x: 106 },
+        
+        { y: 3, x: 107 },
+        
+        { y: 1, x: 108 },
+        
+        { y: 1, x: 109 },
+        
+        { y: 0, x: 110 },
+        
+                    ]
+            }
+            ]});
+        chart.render();
+            
+            }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <p>Hello,</p>
+        <p><b>Here is 5G19B4 Classical BTS OAM Regression Testing Report(5G19B4)</b></p>
+        <p>Tested Jenkins job: <a href=http://mzoamci.eecloud.dynamic.nsn-net.net:8080/job/OAM_5GHZ_EIT_Regression/job/5g.classicbts.5G19_B4.oam.EIT-regression target="_blank">http://mzoamci.eecloud.dynamic.nsn-net.net:8080/job/OAM_5GHZ_EIT_Regression/job/5g.classicbts.5G19_B4.oam.EIT-regression</a></p>
+        <p>Reported Time in UTC: 2019-11-19 09:52:01.949746</p>
+        <h3>Jenkins Build Summary</h3>
+        
+        <div id="chartContainer" style="height: 400px; width: 40%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        
+        <ul style="list-style-type:circle;">
+            <li>Test period: last <b>10</b> hours</li>
+            <li>Total builds: 11, Range:
+                #100--#110</li>
+            <li>No-test-results builds:
+                0
+            </li>
+            
+            <li>Pass builds: 6, Pass Rate: 55.0%</li>
+            <li>Average build time: 200.9 seconds, Maxinum build time:
+                210.0 seconds</li>
+            <li>Average pass build time: 201.7 seconds, Maximum pass build time:
+                210.0</li>
+        </ul>
+        <h3>Test Case Summary:</h3>
+        <p>*ranked by failure rate from high to low</p>
+        <table border="1">
+            <tr>
+                <th>Rank</th>
+                <th>Suite Name</th>
+                <th>Case Name</th>
+                <th>Result(pass/total)</th>
+                <th>Max Duration(s)</th>
+                <th>Max Pass Duration(s)</th>
+                <th>Failed Builds</th>
+            </tr>
+            
+            
+            
+            
+            <tr>
+                <td>1</td>
+                <td bgcolor=red>Login Wepage</td>
+                <td bgcolor=red>Loging with Correct Username and Password</td>
+                <td bgcolor=red>7/11</td>
+                <td>30.0</td>
+                <td>30.0</td>
+                <td>
+                    
+                    
+                    <a href=http://mzoamci.eecloud.dynamic.nsn-net.net:8080/job/OAM_5GHZ_EIT_Regression/job/5g.classicbts.5G19_B4.oam.EIT-regression/105/testReport/ target="_blank">105</a>
+                    
+                    
+                    <a href=http://mzoamci.eecloud.dynamic.nsn-net.net:8080/job/OAM_5GHZ_EIT_Regression/job/5g.classicbts.5G19_B4.oam.EIT-regression/107/testReport/ target="_blank">107</a>
+                    
+                    
+                    <a href=http://mzoamci.eecloud.dynamic.nsn-net.net:8080/job/OAM_5GHZ_EIT_Regression/job/5g.classicbts.5G19_B4.oam.EIT-regression/108/testReport/ target="_blank">108</a>
+                    
+                    
+                    <a href=http://mzoamci.eecloud.dynamic.nsn-net.net:8080/job/OAM_5GHZ_EIT_Regression/job/5g.classicbts.5G19_B4.oam.EIT-regression/109/testReport/ target="_blank">109</a>
+                    
+                </td>
+            </tr>
+            
+            
+            
+            
+            <tr>
+                <td>2</td>
+                <td bgcolor=red>Browser Commodity</td>
+                <td bgcolor=red>Browser Public Commodity</td>
+                <td bgcolor=red>9/11</td>
+                <td>60.0</td>
+                <td>60.0</td>
+                <td>
+                    
+                    
+                    <a href=http://mzoamci.eecloud.dynamic.nsn-net.net:8080/job/OAM_5GHZ_EIT_Regression/job/5g.classicbts.5G19_B4.oam.EIT-regression/104/testReport/ target="_blank">104</a>
+                    
+                    
+                    <a href=http://mzoamci.eecloud.dynamic.nsn-net.net:8080/job/OAM_5GHZ_EIT_Regression/job/5g.classicbts.5G19_B4.oam.EIT-regression/107/testReport/ target="_blank">107</a>
+                    
+                </td>
+            </tr>
+            
+            
+            
+            
+            <tr>
+                <td>3</td>
+                <td bgcolor=red>Login Wepage</td>
+                <td bgcolor=red>Loging with Incorrect Username and Password</td>
+                <td bgcolor=red>9/11</td>
+                <td>70.0</td>
+                <td>70.0</td>
+                <td>
+                    
+                    
+                    <a href=http://mzoamci.eecloud.dynamic.nsn-net.net:8080/job/OAM_5GHZ_EIT_Regression/job/5g.classicbts.5G19_B4.oam.EIT-regression/105/testReport/ target="_blank">105</a>
+                    
+                    
+                    <a href=http://mzoamci.eecloud.dynamic.nsn-net.net:8080/job/OAM_5GHZ_EIT_Regression/job/5g.classicbts.5G19_B4.oam.EIT-regression/107/testReport/ target="_blank">107</a>
+                    
+                </td>
+            </tr>
+            
+            
+            
+            
+            <tr>
+                <td>4</td>
+                <td bgcolor=GREEN>Browser Commodity</td>
+                <td bgcolor=GREEN>Browser Private Commodity</td>
+                <td bgcolor=GREEN>11/11</td>
+                <td>40.0</td>
+                <td>40.0</td>
+                <td>
+                    
+                </td>
+            </tr>
+            
+        </table>
+        <p>BR</p>
+    </div>
+</body>
+
+</html>

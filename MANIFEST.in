@@ -1,0 +1,3 @@
+include README.md
+include conport/cfg.ini
+include conport/template.html

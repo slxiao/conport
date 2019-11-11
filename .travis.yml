@@ -1,0 +1,20 @@
+language: python
+sudo: false
+
+python:
+  - "2.7"
+
+addons:
+  apt:
+    packages:
+    - python-tk
+
+install:
+  - pip install tox
+  - pip install coveralls
+
+script:
+  tox -e test
+
+after_success:
+  coveralls

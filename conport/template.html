@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>contport</title>
+    <script>
+        window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                    text: "build trend",
+                    fontFamily: "Times New Roman",
+                },
+                axisX: {
+                    interval: 1,
+                    valueFormatString: "'#'#0"
+                },
+                axisY: {
+                    valueFormatString: "#0"
+                },
+                data: [
+                    {
+                        type: "stackedColumn",
+                        color: "GREEN",
+                        name: "PASS",
+                        showInLegend: true,
+                        dataPoints: [
+                            {% for build in build_summary %}
+                        { y: {{ build["pass"]}}, x: {{ build["number"]}} },
+        {% endfor %}
+                    ]
+                    }, {
+            type: "stackedColumn",
+                name: "FAIL",
+                    color: "red",
+                        showInLegend: true,
+                            dataPoints: [
+                                {% for build in build_summary %}
+        { y: {{ build["fail"] }}, x: {{ build["number"] }} },
+        {% endfor %}
+                    ]
+            }
+            ]});
+        chart.render();
+            
+            }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <p>Hello,</p>
+        <p><b>{{report_title}}</b></p>
+        <p>Tested Jenkins job: <a href={{job_url}} target="_blank">{{job_url}}</a></p>
+        <p>Reported Time in UTC: {{now}}</p>
+        <h3>Jenkins Build Summary</h3>
+        {% if pure_html == true %}
+        <div id="chartContainer" style="height: 400px; width: 40%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        {% else %}
+        <img src="cid:build_summary_image" alt="build_summary" style="height: 200px; width: 25%;"><br>
+        {% endif %}
+        <ul style="list-style-type:circle;">
+            <li>Test period: last <b>{{past_hours}}</b> hours</li>
+            <li>Total builds: {{build_summary|length}}, Range:
+                #{{build_summary[0]["number"]}}--#{{build_summary[-1]["number"]}}</li>
+            <li>No-test-results builds:
+                {{build_summary | selectattr("fail", "equalto", 0) | list | selectattr("pass", "equalto", 0) | list|length}}
+            </li>
+            {% set pass_num = build_summary | selectattr("fail", "equalto", 0) | list | length %}
+            <li>Pass builds: {{pass_num}}, Pass Rate: {{((pass_num/(build_summary|length))*100)|round}}%</li>
+            <li>Average build time: {{build_metrics["avg_duration"]}} seconds, Maxinum build time:
+                {{build_metrics["max_duration"]}} seconds</li>
+            <li>Average pass build time: {{build_metrics["avg_duration_pass"]}} seconds, Maximum pass build time:
+                {{build_metrics["max_pass_duration"]}}</li>
+        </ul>
+        <h3>Test Case Summary:</h3>
+        <p>*ranked by failure rate from high to low</p>
+        <table border="1">
+            <tr>
+                <th>Rank</th>
+                <th>Suite Name</th>
+                <th>Case Name</th>
+                <th>Result(pass/total)</th>
+                <th>Max Duration(s)</th>
+                <th>Max Pass Duration(s)</th>
+                <th>Failed Builds</th>
+            </tr>
+            {% for i in case_summary %}
+            {% if i["pass"] == i["total"] %}
+            {% set color = "GREEN" %}
+            {% else %}
+            {% set color = "red" %}
+            {% endif %}
+            <tr>
+                <td>{{i["rank"]}}</td>
+                <td bgcolor={{color}}>{{i["suite"]}}</td>
+                <td bgcolor={{color}}>{{i["case"]}}</td>
+                <td bgcolor={{color}}>{{i["pass"]}}/{{i["total"]}}</td>
+                <td>{{i["max_duration"]}}</td>
+                <td>{{i["max_pass_duration"]}}</td>
+                <td>
+                    {% for j in i["npass_numbers"] %}
+                    {% set href_link = job_url + "/" + j|string + "/testReport/" %}
+                    <a href={{href_link}} target="_blank">{{j}}</a>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p>BR</p>
+    </div>
+</body>
+
+</html>

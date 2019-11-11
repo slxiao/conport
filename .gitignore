@@ -1,0 +1,9 @@
+*.pyc
+*.png
+.vscode
+build
+conport.egg-info
+dist
+.tox
+.coverage
+htmlcov
