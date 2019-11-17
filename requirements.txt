@@ -1,2 +1,2 @@
 python-jenkins
-yarl
+jinja2

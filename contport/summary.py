@@ -31,9 +31,12 @@ def get_merged_reports(atom_reports):
 
 def get_ordered_reports(merged_reports):
     for full_name, merged in merged_reports.iteritems():
+        merged['suite'] = full_name.split('.')[0]
+        merged['case'] = full_name.split('.')[1]
         merged['pass'] = len([i for i in merged['atoms'] if i[1] == 'PASSED'])
-        merged['npass'] = len([i for i in merged['atoms'] if i[1] != 'PASSED'])
-        merged['fail_rate'] = merged['npass'] / len(merged['atoms'])
+        merged['total'] = len(merged['atoms'])
+        merged['npass'] = merged['total'] - merged['pass']
+        merged['fail_rate'] = merged['npass'] / merged['total']
         merged['npass_numbers'] = [i[0]
                                    for i in merged['atoms'] if i[1] != 'PASSED']
         sum_pass_duration = sum([i[2]
@@ -49,4 +52,4 @@ def get_ordered_reports(merged_reports):
 
 
 def get_summary(test_reports):
-    return get_ordered_reports(get_merged_reports(get_atom_reports(test_reports)))
+    return get_ordered_reports(get_merged_reports(get_atom_reports(test_reports))).values()

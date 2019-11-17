@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Continuous Testing Report</title>
+</head>
+
+<body>
+    <div class="container">
+        <p>Hello,</p>
+        <p>{{config["title"]}}</p>
+        <p>Tested Jenkins job: {{config["url"]}}</p>
+        <p>Reported Time in UTC: {{now}}</p>
+        <p>Jenkins Build Summary</p>
+        <ul style="list-style-type:circle;">
+            <li>Tested period: last {{config["past_hours"]}} hours</li>
+            <li>Total builds: 10</li>
+            <li>No-test-results builds: 2</li>
+            <li>Pass builds: 4</li>
+          </ul>  
+        <p>Test Case Summary:</p>
+        <table border="1">
+            <tr>
+                <th>Rank</th>
+                <th>Suite Name</th>
+                <th>Case Name</th>
+                <th>Result(pass/total)</th>
+                <th>Owner</th>
+                <th>Failed Builds</th>
+            </tr>
+            {% for i in summary %}
+            <tr>
+                <td>{{i["rank"]}}</td>
+                <td>{{i["suite"]}}</td>
+                <td>{{i["case"]}}</td>
+                <td>{{i["npass"]}}/{{i["total"]}}</td>
+                <td>N/A</td>
+                <td>
+                        {% for j in i["npass_numbers"] %}
+                        {% set href_link = config["url"] + "/" + j|string + "/testReport/" %}
+                        <a href={{href_link}} target="_blank">{{j}}</a>
+                        {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+
+</html>
