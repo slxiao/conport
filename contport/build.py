@@ -3,24 +3,29 @@ import url
 
 from boundary import build_in_boundary
 
+
 def get_jenkins_home(job_url):
     myurl = url.parse(job_url)
     if myurl.port:
         return myurl.scheme + "://" + myurl.host + ":" + str(myurl.port)
     return myurl.scheme + "://" + myurl.host
 
+
 def get_job_name(job_url):
     jenkins_home = get_jenkins_home(job_url)
     items = job_url.replace(jenkins_home, "").strip("/").split("job")
     return "/".join([i.strip("/") for i in items if i])
 
+
 def get_jenkins_instance(job_url):
     jenkins_home = get_jenkins_home(job_url)
     return jenkins.Jenkins(jenkins_home)
 
+
 def get_build_numbers(jenkins_instance, job_name):
     result = jenkins_instance.get_job_info(job_name, fetch_all_builds=True)
     return [i["number"] for i in result["builds"]]
+
 
 def get_test_reports(job_url, past_hours):
     test_reports = {}
@@ -40,8 +45,10 @@ def get_test_reports(job_url, past_hours):
             break
     return test_reports
 
+
 if __name__ == "__main__":
-    #print(get_jenkins_home("http://xxx:8080/job/yyy/"))
-    #print(get_jenkins_home("http://xxx/job/yyy/"))
-    #print(get_job_name("http://xxx:8080/job/yyy/job/zzz"))
-    print(get_test_reports("http://10.183.40.203:49001/job/test-robot-framework/", "24"))
+    # print(get_jenkins_home("http://xxx:8080/job/yyy/"))
+    # print(get_jenkins_home("http://xxx/job/yyy/"))
+    # print(get_job_name("http://xxx:8080/job/yyy/job/zzz"))
+    print(get_test_reports(
+        "http://10.183.40.203:49001/job/test-robot-framework/", "24"))
