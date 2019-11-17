@@ -8,17 +8,17 @@
 <body>
     <div class="container">
         <p>Hello,</p>
-        <p>{{config["title"]}}</p>
-        <p>Tested Jenkins job: {{config["url"]}}</p>
+        <p><b>{{config["title"]}}</b></p>
+        <p>Tested Jenkins job: <a href={{config["url"]}} target="_blank">{{config["url"]}}</a></p>
         <p>Reported Time in UTC: {{now}}</p>
-        <p>Jenkins Build Summary</p>
+        <h3>Jenkins Build Summary</h3>
         <ul style="list-style-type:circle;">
             <li>Tested period: last {{config["past_hours"]}} hours</li>
             <li>Total builds: 10</li>
             <li>No-test-results builds: 2</li>
             <li>Pass builds: 4</li>
           </ul>  
-        <p>Test Case Summary:</p>
+        <h3>Test Case Summary:</h3>
         <table border="1">
             <tr>
                 <th>Rank</th>
@@ -29,11 +29,16 @@
                 <th>Failed Builds</th>
             </tr>
             {% for i in summary %}
+            {% if i["pass"] == i["total"] %} 
+            {% set color = "LIGHTGREEN" %}
+            {% else %}
+            {% set color = "LIGHTSALMON" %}
+            {% endif %}
             <tr>
                 <td>{{i["rank"]}}</td>
-                <td>{{i["suite"]}}</td>
-                <td>{{i["case"]}}</td>
-                <td>{{i["pass"]}}/{{i["total"]}}</td>
+                <td bgcolor={{color}}>{{i["suite"]}}</td>
+                <td bgcolor={{color}}>{{i["case"]}}</td>
+                <td bgcolor={{color}}>{{i["pass"]}}/{{i["total"]}}</td>
                 <td>N/A</td>
                 <td>
                         {% for j in i["npass_numbers"] %}
