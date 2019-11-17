@@ -22,9 +22,47 @@ config = {
 for i in range(len(summary)):
     summary[i]["rank"] = i + 1
 
+build_trend = [
+    {
+        "number": 1,
+        "pass": 1,
+        "fail": 3
+    },
+    {
+        "number": 2,
+        "pass": 1,
+        "fail": 3
+    },
+    {
+        "number": 3,
+        "pass": 1,
+        "fail": 3
+    },
+    {
+        "number": 4,
+        "pass": 1,
+        "fail": 3
+    },
+    {
+        "number": 5,
+        "pass": 0,
+        "fail": 4
+    },
+    {
+        "number": 6,
+        "pass": 0,
+        "fail": 4
+    },
+    {
+        "number": 7,
+        "pass": 0,
+        "fail": 4
+    }
+]
+
 # Render HTML Template String
 html_template_string = template.render(
-    config=config, summary=summary, now=datetime.datetime.utcnow())
+    config=config, summary=summary, now=datetime.datetime.utcnow(), build_trend=build_trend)
 
 
 with open('output.html', 'w') as f:
