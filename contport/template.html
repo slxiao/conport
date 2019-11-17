@@ -3,6 +3,56 @@
 
 <head>
     <title>contport</title>
+    <script>
+            window.onload = function () {
+            
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title:{
+                    text: "build trend",
+                    fontFamily: "Times New Roman",
+                },
+                axisX: {
+                    interval: 1
+                },
+                axisY:{
+                    valueFormatString:"#0"
+                },
+                data: [{
+                    type: "stackedColumn",
+                    color: "LIGHTGREEN",
+                    name: "PASS",
+                    showInLegend: true,
+                    dataPoints: [
+                        { y: 1, x: 1 },
+                        { y: 1, x: 2 },
+                        { y: 1, x: 3 },
+                        { y: 1, x: 4 },
+                        { y: 0, x: 5 },
+                        { y: 0, x: 6 },
+                        { y: 0, x: 7 }
+                    ]
+                    },
+                    {        
+                        type: "stackedColumn",
+                        name: "FAIL",
+                        color: "LIGHTSALMON",
+                        showInLegend: true,
+                        dataPoints: [
+                        { y: 3, x: 1 },
+                        { y: 3, x: 2 },
+                        { y: 3, x: 3 },
+                        { y: 3, x: 4 },
+                        { y: 4, x: 5 },
+                        { y: 4, x: 6 },
+                        { y: 4, x: 7 }
+                        ]
+                    }]
+            });
+            chart.render();
+            
+            }
+            </script>
 </head>
 
 <body>
@@ -12,12 +62,14 @@
         <p>Tested Jenkins job: <a href={{config["url"]}} target="_blank">{{config["url"]}}</a></p>
         <p>Reported Time in UTC: {{now}}</p>
         <h3>Jenkins Build Summary</h3>
+        <div id="chartContainer" style="height: 200px; width: 40%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         <ul style="list-style-type:circle;">
             <li>Tested period: last {{config["past_hours"]}} hours</li>
             <li>Total builds: 10</li>
             <li>No-test-results builds: 2</li>
             <li>Pass builds: 4</li>
-          </ul>  
+        </ul>
         <h3>Test Case Summary:</h3>
         <table border="1">
             <tr>
