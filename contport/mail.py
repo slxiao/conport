@@ -6,6 +6,8 @@ from datetime import date
 import smtplib
 from report import get_html_output
 
+from figure import get_binary_figure
+
 class SentEmail(object):
     def __init__(self, report, log, html5):
         self._mail_host = 'mailrelay.int.nokia.com'
@@ -33,9 +35,7 @@ class SentEmail(object):
             msg.attach(part2)
 
             # This example assumes the image is in the current directory
-            fp = open('logo.png', 'rb')
-            msgImage = MIMEImage(fp.read())
-            fp.close()
+            msgImage = MIMEImage(get_binary_figure(), "png")
 
             #   Define the image's ID as referenced above
             msgImage.add_header('Content-ID', '<build_trend_image>')
