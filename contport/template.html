@@ -54,8 +54,12 @@
         <p>Tested Jenkins job: <a href={{config["url"]}} target="_blank">{{config["url"]}}</a></p>
         <p>Reported Time in UTC: {{now}}</p>
         <h3>Jenkins Build Summary</h3>
+        {% if html5 == true %}
         <div id="chartContainer" style="height: 200px; width: 40%;"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        {% else %}
+        <img src="cid:build_trend_image" alt="build_trend" style="height: 200px; width: 25%;"><br>
+        {% endif %}
         <ul style="list-style-type:circle;">
             <li>Tested period: last {{config["past_hours"]}} hours</li>
             <li>Total builds: 10</li>

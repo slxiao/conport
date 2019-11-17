@@ -1,30 +1,50 @@
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.MIMEImage import MIMEImage
+from datetime import date
 
+import smtplib
+from report import get_html_output
 
 class SentEmail(object):
-    def __init__(self, report, log):
+    def __init__(self, report, log, html5):
         self._mail_host = 'mailrelay.int.nokia.com'
         self._mail_user = 'tdd_lte_oam_ci'
         self._mail_password = ''
         self._msg = None
         self._log = log
         self.report = report
+        self.html5 = html5
 
     def run(self):
         self._generate_mail_text()
         self._sent_email()
 
-    def _get_xml_content(self):
-        with open(self._log, 'rb') as fp:
-            content = fp.read()
-        return content
-
     def _generate_mail_text(self):
-        _msg = MIMEText('Hello\n\n%s\n%s' % (self._get_xml_content(), 'Best Regards'), 'html', 'utf-8')
-        _msg['From'] = SENDER
-        _msg['To'] = ';'.join(TO_RECEIVERS)
-        _msg['Cc'] = ';'.join(CC_RECEIVERS)
-        _msg['Subject'] = '[%s] %s' % (date.today(), self.report)
-        self._msg = _msg
+        html_output = get_html_output(self.html5)
+        if self.html5:
+            msg = MIMEText(html_output, 'html', 'utf-8')            
+        else:
+            msg = MIMEMultipart('related')
+            # Record the MIME types of text/html.
+            part2 = MIMEText(html_output, 'html')
+
+            # Attach parts into message container.
+            msg.attach(part2)
+
+            # This example assumes the image is in the current directory
+            fp = open('logo.png', 'rb')
+            msgImage = MIMEImage(fp.read())
+            fp.close()
+
+            #   Define the image's ID as referenced above
+            msgImage.add_header('Content-ID', '<build_trend_image>')
+            msg.attach(msgImage)
+        msg['From'] = "shiliang-shelwin.xiao@nokia-sbell.com"
+        msg['To'] = ';'.join(["shiliang-shelwin.xiao@nokia-sbell.com", "slxiao1988@163.com", "shliangxiao@gmail.com"])
+        msg['Cc'] = ';'.join(["slxiao1988@163.com", "shliangxiao@gmail.com"])
+        msg['Subject'] = '[%s] %s' % (date.today(), self.report)
+        self.msg = msg
 
     def _sent_email(self):
         try:
@@ -34,10 +54,13 @@ class SentEmail(object):
                 smtpobj.login(self._mail_user, self._mail_password)
             except Exception:
                 pass
-            smtpobj.sendmail(self._msg['From'], (self._msg['To'] + ';' + self._msg['Cc']).split(';'),
-                             self._msg.as_string())
+            smtpobj.sendmail(self.msg['From'], (self.msg['To'] + ';' + self.msg['Cc']).split(';'),
+                             self.msg.as_string())
             smtpobj.quit()
-            print "[%s]INFO: Sent email successfully!" % get_timestamp()
+            print "INFO: Sent email successfully!"
         except smtplib.SMTPException as e:
-            raise RuntimeError("[%s]ERROR: Can not send email. Error is %s." % (get_timestamp(), str(e)))
+            raise RuntimeError("ERROR: Can not send email. Error is %s." % str(e))
+
+if __name__ == "__main__":
+    SentEmail("Here is the report of xxx", "output.html", False).run()
 
