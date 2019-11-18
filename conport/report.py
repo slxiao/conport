@@ -12,9 +12,6 @@ def get_html_output(job_url, report_title, past_hours, build_summary, case_summa
     jinja2_template_string = open(get_template_path(), 'rb').read()
     template = Template(jinja2_template_string)
 
-    for i in range(len(case_summary)):
-        case_summary[i]["rank"] = i + 1
-
     html_template_string = template.render(
         job_url=job_url, report_title=report_title, past_hours=past_hours, case_summary=case_summary, now=datetime.datetime.utcnow(), build_summary=build_summary, pure_html=True if pure_html == "true" else False)
 

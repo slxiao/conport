@@ -67,4 +67,8 @@ def get_build_summary(test_reports):
 
 
 def get_case_summary(test_reports):
-    return get_ordered_reports(get_merged_reports(get_atom_reports(test_reports))).values()
+    case_summary = get_ordered_reports(
+        get_merged_reports(get_atom_reports(test_reports))).values()
+    for i in range(len(case_summary)):
+        case_summary[i]["rank"] = i + 1
+    return case_summary
