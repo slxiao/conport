@@ -1,3 +1,4 @@
+jinja2>=2.7
+matplotlib
 python-jenkins
-jinja2
 url
