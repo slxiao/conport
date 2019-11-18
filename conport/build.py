@@ -48,17 +48,13 @@ def get_test_reports(job_url, past_hours):
     build_numbers = get_build_numbers(jenkins_instance, job_name)
     for number in build_numbers:
         build_info = jenkins_instance.get_build_info(job_name, number)
-        print(build_info["building"])
         if build_info["building"]:
-            print("111111111111")
             continue
         elif build_in_boundary(past_hours, build_info["timestamp"] + build_info["duration"]):
-            print("2222222222222")
             report = jenkins_instance.get_build_test_report(job_name, number)
             test_reports[number] = {}
             test_reports[number]["duration"] = build_info["duration"]
             test_reports[number]["report"] = report
         else:
-            print("3333333333333")
             break
     return test_reports
