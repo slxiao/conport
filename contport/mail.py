@@ -62,5 +62,5 @@ class SentEmail(object):
             raise RuntimeError("ERROR: Can not send email. Error is %s." % str(e))
 
 if __name__ == "__main__":
-    SentEmail("Here is the report of xxx", "output.html", False).run()
+    SentEmail("Here is the report of xxx", "output.html", True).run()
 

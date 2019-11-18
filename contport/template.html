@@ -62,11 +62,12 @@
         {% endif %}
         <ul style="list-style-type:circle;">
             <li>Tested period: last {{config["past_hours"]}} hours</li>
-            <li>Total builds: 10</li>
+            <li>Total builds: {{build_trend|length}}, Range: #{{build_trend[0]["number"]}}--#{{build_trend[-1]["number"]}}</li>
             <li>No-test-results builds: 2</li>
             <li>Pass builds: 4</li>
         </ul>
         <h3>Test Case Summary:</h3>
+        <p>*ranked by failure rate from high to low</p>
         <table border="1">
             <tr>
                 <th>Rank</th>
