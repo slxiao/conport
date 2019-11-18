@@ -6,7 +6,7 @@ from .report import get_html_output
 from .mail import SendEmail
 
 
-def main(args=None):
+def conport(args=None):
     parser = get_parser()
     args = parser.parse_args(args)
 
@@ -22,4 +22,4 @@ def main(args=None):
 
 
 if __name__ == "__main__":
-    main()
+    conport()

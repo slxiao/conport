@@ -1,2 +1,6 @@
 *.pyc
 *.png
+.vscode
+build
+conport.egg-info
+dist
