@@ -5,7 +5,7 @@ from datetime import date
 
 import smtplib
 
-from conport.figure import get_binary_figure
+from .figure import get_binary_figure
 
 
 class SendEmail(object):

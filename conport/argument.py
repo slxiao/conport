@@ -1,6 +1,6 @@
 import argparse
 
-from conport.config import get_default_config
+from .config import get_default_config
 
 
 def get_parser():

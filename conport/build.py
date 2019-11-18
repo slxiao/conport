@@ -1,7 +1,7 @@
 import jenkins
 import url
 
-from conport.boundary import build_in_boundary
+from .boundary import build_in_boundary
 
 
 def get_jenkins_home(job_url):

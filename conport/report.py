@@ -1,10 +1,13 @@
 from jinja2 import Template
 import datetime
+import os
 
+def get_template_path():
+    return os.path.join(os.path.abspath(os.path.dirname(__file__)), "template.html")
 
 def get_html_output(job_url, report_title, past_hours, summary, html5):
     # Get File Content in String
-    jinja2_template_string = open("template.html", 'rb').read()
+    jinja2_template_string = open(get_template_path(), 'rb').read()
 
     # Create Template Object
 

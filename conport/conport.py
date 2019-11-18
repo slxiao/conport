@@ -1,8 +1,8 @@
-from conport.argument import get_parser
-from conport.build import get_test_reports
-from conport.summary import get_summary
-from conport.report import get_html_output
-from conport.mail import SendEmail
+from .argument import get_parser
+from .build import get_test_reports
+from .summary import get_summary
+from .report import get_html_output
+from .mail import SendEmail
 
 
 def main(args=None):
