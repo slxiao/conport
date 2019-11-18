@@ -5,7 +5,8 @@ from datetime import date
 
 import smtplib
 
-from figure import get_binary_figure
+from conport.figure import get_binary_figure
+
 
 class SendEmail(object):
     def __init__(self, host, user, password, title, _from, to, cc, html_output, html5):
@@ -28,7 +29,7 @@ class SendEmail(object):
 
     def _generate_mail_text(self):
         if self.html5 == "true":
-            msg = MIMEText(self.html_output, 'html', 'utf-8')            
+            msg = MIMEText(self.html_output, 'html', 'utf-8')
         else:
             msg = MIMEMultipart('related')
             # Record the MIME types of text/html.
@@ -40,7 +41,7 @@ class SendEmail(object):
             #   Define the image's ID as referenced above
             msgImage.add_header('Content-ID', '<build_trend_image>')
             msg.attach(msgImage)
-        
+
         msg['From'] = self._from
         msg['To'] = ';'.join(self.to)
         msg['Cc'] = ';'.join(self.cc)
@@ -60,4 +61,5 @@ class SendEmail(object):
             smtpobj.quit()
             print "INFO: Sent email successfully!"
         except smtplib.SMTPException as e:
-            raise RuntimeError("ERROR: Can not send email. Error is %s." % str(e))
+            raise RuntimeError(
+                "ERROR: Can not send email. Error is %s." % str(e))

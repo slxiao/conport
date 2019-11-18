@@ -1,7 +1,7 @@
 import jenkins
 import url
 
-from boundary import build_in_boundary
+from conport.boundary import build_in_boundary
 
 
 def get_jenkins_home(job_url):
@@ -44,11 +44,3 @@ def get_test_reports(job_url, past_hours):
         else:
             break
     return test_reports
-
-
-if __name__ == "__main__":
-    # print(get_jenkins_home("http://xxx:8080/job/yyy/"))
-    # print(get_jenkins_home("http://xxx/job/yyy/"))
-    # print(get_job_name("http://xxx:8080/job/yyy/job/zzz"))
-    print(get_test_reports(
-        "http://10.183.40.203:49001/job/test-robot-framework/", "24"))

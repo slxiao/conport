@@ -108,7 +108,8 @@ build_trend = [
         "pass": 0,
         "fail": 4
     }
-    ]
+]
+
 
 def get_binary_figure():
     N = len(build_trend)
@@ -116,7 +117,6 @@ def get_binary_figure():
     failed = [i["fail"] for i in build_trend]
     ind = np.arange(N)    # the x locations for the groups
     width = 0.35       # the width of the bars: can also be len(x) sequence
-
 
     plt.figure(figsize=(8, 4.5))
 
@@ -127,7 +127,7 @@ def get_binary_figure():
     plt.title('Build Trend')
     plt.xticks(ind, ["#%s" % (i+1) for i in range(N)])
     #ax = plt.gca()
-    #for label in ax.get_xaxis().get_ticklabels()[::2]:
+    # for label in ax.get_xaxis().get_ticklabels()[::2]:
     #    label.set_visible(False)
     #  plt.yticks(np.arange(0, 81, 10))
     plt.legend((p1[0], p2[0]), ('Pass', 'Fail'))
@@ -137,4 +137,4 @@ def get_binary_figure():
     buf.seek(0)
     return buf.read()
 
-    #plt.savefig('build_trend_image.png')
+    # plt.savefig('build_trend_image.png')
