@@ -4,11 +4,16 @@ from .summary import get_build_summary
 from .summary import get_case_summary
 from .report import get_html_output
 from .mail import SendEmail
+from . import __version__
 
 
 def conport(args=None):
     parser = get_parser()
     args = parser.parse_args(args)
+
+    if args.version:
+        print("conport v" + __version__)
+        return
 
     test_reports = get_test_reports(args.job_url, args.past_hours)
     build_summary = get_build_summary(test_reports)

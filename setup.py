@@ -6,9 +6,10 @@ import sys
 import setuptools
 from distutils.core import setup
 
-version = '0.0.1'
+version = '0.0.6'
 
 setup(
+    include_package_data=True,
     name='conport',
     version=version,
     packages=['conport'],

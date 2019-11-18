@@ -32,4 +32,6 @@ def get_parser():
     parser.add_argument("--pure_html", help="pure html or not",
                         default=defaults["default"]["pure_html"])
 
+    parser.add_argument("--version", action='store_true', help="print version")
+
     return parser
