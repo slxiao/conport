@@ -17,8 +17,8 @@ def main(args=None):
     html_output = get_html_output(
         args.job_url, args.report_title, args.past_hours, build_summary, case_summary, args.pure_html)
 
-    SendEmail(args.mail_host, args.mail_user, args.mail_pwd, args.report_title, args.sender, eval(
-        args.receivers), eval(args.receivers_cc), html_output, build_summary, args.pure_html)
+    SendEmail(args.mail_host, args.mail_user, args.mail_pwd, args.report_title, args.sender,
+              args.receivers, args.receivers_cc, html_output, build_summary, args.pure_html)
 
 
 if __name__ == "__main__":

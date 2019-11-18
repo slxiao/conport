@@ -25,9 +25,9 @@ def get_parser():
     parser.add_argument("--sender", help="email sender",
                         default=defaults["email"]["sender"])
     parser.add_argument(
-        "--receivers", help="email receivers, format is ['receiver1', 'receiver2', ...]", default=defaults["email"]["receivers"])
+        "--receivers", help="email receivers, format is receiver1, receiver2, ...", default=defaults["email"]["receivers"])
     parser.add_argument("--receivers_cc",
-                        help="email receivers cc, format is ['receivercc1', 'receivercc2', ...]", default=defaults["email"]["receivers_cc"])
+                        help="email receivers cc, format is receivercc1, receivercc2, ...", default=defaults["email"]["receivers_cc"])
 
     parser.add_argument("--pure_html", help="pure html or not",
                         default=defaults["default"]["pure_html"])
