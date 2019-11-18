@@ -5,3 +5,5 @@ build
 conport.egg-info
 dist
 .tox
+.coverage
+htmlcov
