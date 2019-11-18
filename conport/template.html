@@ -4,20 +4,20 @@
 <head>
     <title>contport</title>
     <script>
-            window.onload = function () {
-            
+        window.onload = function () {
+
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
-                title:{
+                title: {
                     text: "build trend",
                     fontFamily: "Times New Roman",
                 },
                 axisX: {
                     interval: 1,
-                    valueFormatString:"'#'#0"
+                    valueFormatString: "'#'#0"
                 },
-                axisY:{
-                    valueFormatString:"#0"
+                axisY: {
+                    valueFormatString: "#0"
                 },
                 data: [{
                     type: "stackedColumn",
@@ -25,44 +25,45 @@
                     name: "PASS",
                     showInLegend: true,
                     dataPoints: [
-                        {% for build in build_trend %}
-                        { y: {{build["pass"]}}, x: {{build["number"]}} },
-                        {% endfor %}
+                        {% for build in build_summary %}
+                        { y: {{ build["pass"]}}, x: {{ build["number"]}} },
+        {% endfor %}
                     ]
                     },
-                    {        
-                        type: "stackedColumn",
-                        name: "FAIL",
-                        color: "LIGHTSALMON",
+        {
+            type: "stackedColumn",
+                name: "FAIL",
+                    color: "LIGHTSALMON",
                         showInLegend: true,
-                        dataPoints: [
-                        {% for build in build_trend %}
-                        { y: {{build["fail"]}}, x: {{build["number"]}} },
-                        {% endfor %}
+                            dataPoints: [
+                                {% for build in build_summary %}
+        { y: { { build["fail"] } }, x: { { build["number"] } } },
+        {% endfor %}
                     ]
             }]});
-            chart.render();
+        chart.render();
             
             }
-            </script>
+    </script>
 </head>
 
 <body>
     <div class="container">
         <p>Hello,</p>
-        <p><b>{{config["title"]}}</b></p>
-        <p>Tested Jenkins job: <a href={{config["url"]}} target="_blank">{{config["url"]}}</a></p>
+        <p><b>{{report_title}}</b></p>
+        <p>Tested Jenkins job: <a href={{job_url}} target="_blank">{{job_url}}</a></p>
         <p>Reported Time in UTC: {{now}}</p>
         <h3>Jenkins Build Summary</h3>
-        {% if html5 == true %}
+        {% if pure_html == true %}
         <div id="chartContainer" style="height: 200px; width: 40%;"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         {% else %}
-        <img src="cid:build_trend_image" alt="build_trend" style="height: 200px; width: 25%;"><br>
+        <img src="cid:build_summary_image" alt="build_summary" style="height: 200px; width: 25%;"><br>
         {% endif %}
         <ul style="list-style-type:circle;">
-            <li>Tested period: last {{config["past_hours"]}} hours</li>
-            <li>Total builds: {{build_trend|length}}, Range: #{{build_trend[0]["number"]}}--#{{build_trend[-1]["number"]}}</li>
+            <li>Tested period: last {{past_hours}} hours</li>
+            <li>Total builds: {{build_summary|length}}, Range:
+                #{{build_summary[0]["number"]}}--#{{build_summary[-1]["number"]}}</li>
             <li>No-test-results builds: 2</li>
             <li>Pass builds: 4</li>
         </ul>
@@ -77,8 +78,8 @@
                 <th>Owner</th>
                 <th>Failed Builds</th>
             </tr>
-            {% for i in summary %}
-            {% if i["pass"] == i["total"] %} 
+            {% for i in case_summary %}
+            {% if i["pass"] == i["total"] %}
             {% set color = "LIGHTGREEN" %}
             {% else %}
             {% set color = "LIGHTSALMON" %}
@@ -90,10 +91,10 @@
                 <td bgcolor={{color}}>{{i["pass"]}}/{{i["total"]}}</td>
                 <td>N/A</td>
                 <td>
-                        {% for j in i["npass_numbers"] %}
-                        {% set href_link = config["url"] + "/" + j|string + "/testReport/" %}
-                        <a href={{href_link}} target="_blank">{{j}}</a>
-                        {% endfor %}
+                    {% for j in i["npass_numbers"] %}
+                    {% set href_link = job_url + "/" + j|string + "/testReport/" %}
+                    <a href={{href_link}} target="_blank">{{j}}</a>
+                    {% endfor %}
                 </td>
             </tr>
             {% endfor %}

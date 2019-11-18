@@ -44,12 +44,27 @@ def get_ordered_reports(merged_reports):
         merged['avg_pass_duration'] = sum_pass_duration / \
             merged['pass'] if merged['pass'] else "NA"
 
-    print(merged_reports)
     sorted_merged_reports = sorted(
         merged_reports.items(), key=lambda x: x[1]['fail_rate'], reverse=True)
 
     return collections.OrderedDict(sorted_merged_reports)
 
 
-def get_summary(test_reports):
+def get_build_summary(test_reports):
+    build_summary = []
+    for number, report in test_reports.iteritems():
+        build = {"number": number, "pass": 0, "fail": 0}
+        suites = report['report']['suites']
+        for suite in suites:
+            for case in suite['cases']:
+                if case["status"] == "PASSED":
+                    build["pass"] += 1
+                else:
+                    build["fail"] += 1
+        build_summary.append(build)
+    sorted(build_summary, key=lambda x: x["number"])
+    return build_summary
+
+
+def get_case_summary(test_reports):
     return get_ordered_reports(get_merged_reports(get_atom_reports(test_reports))).values()
