@@ -61,11 +61,14 @@
         <img src="cid:build_summary_image" alt="build_summary" style="height: 200px; width: 25%;"><br>
         {% endif %}
         <ul style="list-style-type:circle;">
-            <li>Tested period: last {{past_hours}} hours</li>
+            <li>Test period: last <b>{{past_hours}}</b> hours</li>
             <li>Total builds: {{build_summary|length}}, Range:
                 #{{build_summary[0]["number"]}}--#{{build_summary[-1]["number"]}}</li>
-            <li>No-test-results builds: 2</li>
-            <li>Pass builds: 4</li>
+            <li>No-test-results builds:
+                {{build_summary | selectattr("fail", "equalto", 0) | list | selectattr("pass", "equalto", 0) | list|length}}
+            </li>
+            {% set pass_num = build_summary | selectattr("fail", "equalto", 0) | list | length %}
+            <li>Pass builds: {{pass_num}}, Pass Rate: {{((pass_num/(build_summary|length))*100)|round}}%</li>
         </ul>
         <h3>Test Case Summary:</h3>
         <p>*ranked by failure rate from high to low</p>
