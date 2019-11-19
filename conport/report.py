@@ -15,12 +15,12 @@ def get_html_output(job_url, report_title, past_hours, build_summary, case_summa
 
     build_metrics = {}
     build_metrics["avg_duration"] = round(sum(
-        [i["duration"] for i in build_summary])/len(build_summary), 1)
+        [i["duration"] for i in build_summary])/len(build_summary), 1) if len(build_summary) else "NA"
     passed_builds = [i["duration"] for i in build_summary if i["fail"] == 0]
     build_metrics["avg_duration_pass"] = "NA" if not passed_builds else round(sum(passed_builds
                                                                                   )/len(passed_builds), 1)
     build_metrics["max_duration"] = round(
-        max([i["duration"] for i in build_summary]), 1)
+        max([i["duration"] for i in build_summary]), 1) if [i["duration"] for i in build_summary] else "NA"
     build_metrics["max_pass_duration"] = round(max(
         passed_builds), 1) if passed_builds else "NA"
 

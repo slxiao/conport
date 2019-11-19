@@ -16,11 +16,12 @@ test_reports = {
                                 "name": "case2",
                                 "status": "FAILED",
                                 "duration": 100
-                        }
+                            }
                     ]
                 }
             ]
-        }
+        },
+        "duration": 1
     }
 }
 
@@ -46,4 +47,4 @@ def test_get_case_summary():
 
 def test_get_build_summary():
     assert summary.get_build_summary(test_reports) == [
-        {'fail': 1, 'number': 1, 'pass': 1}]
+        {'duration': 0.0, 'fail': 1, 'number': 1, 'pass': 1}]
