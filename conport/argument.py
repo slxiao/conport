@@ -7,7 +7,7 @@ def get_parser():
     defaults = get_default_config()
 
     parser = argparse.ArgumentParser()
-    print(parser)
+
     parser.add_argument("--job_url", help="Jenkins job url",
                         default=defaults.default.job_url)
     parser.add_argument("--report_title", help="continuous testing report title",

@@ -40,5 +40,6 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Topic :: Software Development :: Libraries :: Python Modules',
-    ]
+    ],
+    data_files=[('', ['conport/cfg.ini', 'conport/template.html'])]
 )

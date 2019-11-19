@@ -21,7 +21,7 @@
                 },
                 data: [{
                     type: "stackedColumn",
-                    color: "LIGHTGREEN",
+                    color: "GREEN",
                     name: "PASS",
                     showInLegend: true,
                     dataPoints: [
@@ -33,7 +33,7 @@
         {
             type: "stackedColumn",
                 name: "FAIL",
-                    color: "LIGHTSALMON",
+                    color: "red",
                         showInLegend: true,
                             dataPoints: [
                                 {% for build in build_summary %}
@@ -83,9 +83,9 @@
             </tr>
             {% for i in case_summary %}
             {% if i["pass"] == i["total"] %}
-            {% set color = "LIGHTGREEN" %}
+            {% set color = "GREEN" %}
             {% else %}
-            {% set color = "LIGHTSALMON" %}
+            {% set color = "red" %}
             {% endif %}
             <tr>
                 <td>{{i["rank"]}}</td>

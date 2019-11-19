@@ -45,7 +45,7 @@ def get_ordered_reports(merged_reports):
             merged['pass'] if merged['pass'] else "NA"
 
     sorted_merged_reports = sorted(
-        merged_reports.items(), key=lambda x: x[1]['fail_rate'], reverse=True)
+        merged_reports.items(), key=lambda x: (-1*x[1]['fail_rate'], x[1]["suite"], x[1]["case"]))
 
     return collections.OrderedDict(sorted_merged_reports)
 

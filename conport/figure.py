@@ -12,12 +12,13 @@ def get_binary_figure(build_summary):
     ind = np.arange(N)
     plt.figure(figsize=(8, 4.5))
 
-    p1 = plt.bar(ind, passed, color="lightgreen")
-    p2 = plt.bar(ind, failed, bottom=passed, color="LIGHTSALMON")
+    p1 = plt.bar(ind, passed, color="green")
+    p2 = plt.bar(ind, failed, bottom=passed, color="red")
 
     plt.ylabel('Number of cases')
     plt.title('Build Trend')
-    plt.xticks(ind, ["#%s" % build_summary[i]["number"] for i in range(N)])
+    plt.xticks(ind, ["#%s" % build_summary[i]["number"]
+                     for i in range(N)],  rotation='vertical')
 
     plt.legend((p1[0], p2[0]), ('Pass', 'Fail'))
 
