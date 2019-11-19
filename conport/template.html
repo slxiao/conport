@@ -69,6 +69,10 @@
             </li>
             {% set pass_num = build_summary | selectattr("fail", "equalto", 0) | list | length %}
             <li>Pass builds: {{pass_num}}, Pass Rate: {{((pass_num/(build_summary|length))*100)|round}}%</li>
+            <li>Average build time: {{build_metrics["avg_duration"]}} seconds, Maxinum build time:
+                {{build_metrics["max_duration"]}} seconds</li>
+            <li>Average pass build time: {{build_metrics["avg_duration_pass"]}} seconds, Maximum pass build time:
+                {{build_metrics["max_pass_duration"]}}</li>
         </ul>
         <h3>Test Case Summary:</h3>
         <p>*ranked by failure rate from high to low</p>
@@ -78,7 +82,8 @@
                 <th>Suite Name</th>
                 <th>Case Name</th>
                 <th>Result(pass/total)</th>
-                <th>Owner</th>
+                <th>Max Duration(s)</th>
+                <th>Max Pass Duration(s)</th>
                 <th>Failed Builds</th>
             </tr>
             {% for i in case_summary %}
@@ -92,7 +97,8 @@
                 <td bgcolor={{color}}>{{i["suite"]}}</td>
                 <td bgcolor={{color}}>{{i["case"]}}</td>
                 <td bgcolor={{color}}>{{i["pass"]}}/{{i["total"]}}</td>
-                <td>N/A</td>
+                <td>{{i["max_duration"]}}</td>
+                <td>{{i["max_pass_duration"]}}</td>
                 <td>
                     {% for j in i["npass_numbers"] %}
                     {% set href_link = job_url + "/" + j|string + "/testReport/" %}

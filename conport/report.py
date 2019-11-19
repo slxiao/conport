@@ -1,3 +1,4 @@
+from __future__ import division
 import datetime
 import os
 
@@ -12,7 +13,18 @@ def get_html_output(job_url, report_title, past_hours, build_summary, case_summa
     jinja2_template_string = open(get_template_path(), 'rb').read()
     template = Template(jinja2_template_string)
 
-    html_template_string = template.render(
-        job_url=job_url, report_title=report_title, past_hours=past_hours, case_summary=case_summary, now=datetime.datetime.utcnow(), build_summary=build_summary, pure_html=True if pure_html == "true" else False)
+    build_metrics = {}
+    build_metrics["avg_duration"] = round(sum(
+        [i["duration"] for i in build_summary])/len(build_summary), 1)
+    passed_builds = [i["duration"] for i in build_summary if i["fail"] == 0]
+    build_metrics["avg_duration_pass"] = "NA" if not passed_builds else round(sum(passed_builds
+                                                                                  )/len(passed_builds), 1)
+    build_metrics["max_duration"] = round(
+        max([i["duration"] for i in build_summary]), 1)
+    build_metrics["max_pass_duration"] = round(max(
+        passed_builds), 1) if passed_builds else "NA"
+
+    html_template_string = template.render(build_metrics=build_metrics,
+                                           job_url=job_url, report_title=report_title, past_hours=past_hours, case_summary=case_summary, now=datetime.datetime.utcnow(), build_summary=build_summary, pure_html=True if pure_html == "true" else False)
 
     return html_template_string
