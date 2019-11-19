@@ -19,28 +19,29 @@
                 axisY: {
                     valueFormatString: "#0"
                 },
-                data: [{
-                    type: "stackedColumn",
-                    color: "GREEN",
-                    name: "PASS",
-                    showInLegend: true,
-                    dataPoints: [
-                        {% for build in build_summary %}
+                data: [
+                    {
+                        type: "stackedColumn",
+                        color: "GREEN",
+                        name: "PASS",
+                        showInLegend: true,
+                        dataPoints: [
+                            {% for build in build_summary %}
                         { y: {{ build["pass"]}}, x: {{ build["number"]}} },
         {% endfor %}
                     ]
-                    },
-        {
+                    }, {
             type: "stackedColumn",
                 name: "FAIL",
                     color: "red",
                         showInLegend: true,
                             dataPoints: [
                                 {% for build in build_summary %}
-        { y: { { build["fail"] } }, x: { { build["number"] } } },
+        { y: {{ build["fail"] }}, x: {{ build["number"] }} },
         {% endfor %}
                     ]
-            }]});
+            }
+            ]});
         chart.render();
             
             }
@@ -55,7 +56,7 @@
         <p>Reported Time in UTC: {{now}}</p>
         <h3>Jenkins Build Summary</h3>
         {% if pure_html == true %}
-        <div id="chartContainer" style="height: 200px; width: 40%;"></div>
+        <div id="chartContainer" style="height: 400px; width: 40%;"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         {% else %}
         <img src="cid:build_summary_image" alt="build_summary" style="height: 200px; width: 25%;"><br>
