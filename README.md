@@ -1,5 +1,5 @@
 <p align="center">
-	<img alt="madge" src="./logo.png" width="200">
+	<img alt="madge" src="https://github.com/slxiao/conport/blob/master/logo.png" width="200">
 </p>
 
 <p align="center">
@@ -18,16 +18,20 @@
 	</a>
 </p>
 
+# conport
+
 **conport** is an Python tool for generating continuous regression testing reports. It supports both HTML report and email report. In each report, testing build trend, testing build metrics and test case summary are demonstrated. Check the [demo](#demo) as an example.
 # How to install
 Use pip to install:
 ```shell
 pip install conport
 ```
-or you can clone the repo, and inside the directory, run:
+
+You can also clone the repo, and inside the directory, run:
 ```shell
 python setup.py develop
 ```
+
 > note: when install conport, all denpendent libs specified in [requirements.txt](./requirements.txt) will be automatically installed. Due to the requirement of dependency `matplotlib`, you may need to install Linux library `python-tk` if necessary. In ubuntu, you can run command `apt install python-tk` to install it.
 
 # How to use
@@ -86,7 +90,7 @@ You can obtain some key information from the picture:
 - Testing build metrics
 - Test case summary, with a focus on failed cases statistics
 
-![demo](./demo.png)
+![demo](https://github.com/slxiao/conport/blob/master/demo.png)
 # How to develop
 First install `tox` with:
 ```shell

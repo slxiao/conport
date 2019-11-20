@@ -4,9 +4,9 @@ import io
 import sys
 
 import setuptools
-from distutils.core import setup
+from setuptools import setup
 
-version = '0.0.6'
+version = '1.1.5'
 
 setup(
     include_package_data=True,
@@ -20,6 +20,7 @@ setup(
         "url"
     ],
     long_description=io.open('README.md', encoding='utf8').read(),
+    long_description_content_type='text/markdown',
     entry_points={
         'console_scripts': [
             'conport = conport.conport:conport',
