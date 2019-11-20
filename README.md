@@ -25,7 +25,7 @@ or you can clone the repo, and inside the directory, run:
 ```shell
 python setup.py develop
 ```
-> note: when install conport, all denpendent libs specified in [requirements.txt](./requirements.txt) will be automatically installed. Due to the dependent `matplotlib`, you may need to install Linux library `python-tk` if necessary. In ubuntu, you can run command `apt install python-tk` to install it.
+> note: when install conport, all denpendent libs specified in [requirements.txt](./requirements.txt) will be automatically installed. Due to the requirement of dependency `matplotlib`, you may need to install Linux library `python-tk` if necessary. In ubuntu, you can run command `apt install python-tk` to install it.
 
 # How to use
 After install conport successfully, shell command `conport` will be avaiable.
@@ -72,20 +72,34 @@ optional arguments:
   --version             print version
 ```
 The arguments, if not speficied, will be fetched from the [default configuration file](./conport/cfg.ini). Anyway, for your specific configuration, these arguments needs to be given.
+> note: parameter `pure_html` is needed because email cannot support HTML5 figure. In that case, `conport` create figure by using `matplotlib` and then embed that figure into email message with `email.MIMEImage`. 
 # demo
 The following demo picture is created from command:
 ```shell
 conport --job_url http://test-jenkins:8080/job/demo-job-conport --past_hours 8 --report_title "Here is regression testing report for demo usage of conport" --pure_html false --send_email true
 ```
+You can obtain some key information from the picture:
+- Tetsing build trend
+- Testing build metrics
+- Test case summary, with a focus on failed cases statistics
+
 ![demo](./demo.png)
 # How to develop
 First install `tox` with:
 ```shell
 pip install tox
 ```
-Then you can run UT/coverage by:
+Run UT and coverage:
+```shell
+python -m pytest -vv -s --cov=conport --cov-report term --cov-report html
+```
+Run tox:
 ```shell
 tox -e test
+```
+Local install and test:
+```shell
+python setup.py develop
 ```
 # Lisense
 MIT
