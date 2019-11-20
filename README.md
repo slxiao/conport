@@ -21,6 +21,9 @@
 # conport
 
 **conport** is an Python tool for generating continuous regression testing reports. It supports both HTML report and email report. In each report, testing build trend, testing build metrics and test case summary are demonstrated. Check the [demo](#demo) as an example.
+
+[公众号文章](https://mp.weixin.qq.com/s/JiW-0FI5HmAHYuQecaT4vg)
+
 # How to install
 Use pip to install:
 ```shell
