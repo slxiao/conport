@@ -15,7 +15,7 @@
 	</a>
 </p>
 
-**conport** is an Python tool for generating continuous regression testing reports. It supports both HTML report and email report. In each report, testing build trend, testing build metrics and test case summary are demonstrated. Check the [demo report](./demo.html) as an example.
+**conport** is an Python tool for generating continuous regression testing reports. It supports both HTML report and email report. In each report, testing build trend, testing build metrics and test case summary are demonstrated. Check the [demo](#demo) as an example.
 # How to install
 Use pip to install:
 ```shell
@@ -72,7 +72,12 @@ optional arguments:
   --version             print version
 ```
 The arguments, if not speficied, will be fetched from the [default configuration file](./conport/cfg.ini). Anyway, for your specific configuration, these arguments needs to be given.
-
+# demo
+The following demo picture is created from command:
+```shell
+conport --job_url http://test-jenkins:8080/job/demo-job-conport --past_hours 8 --report_title "Here is regression testing report for demo usage of conport" --pure_html false --send_email true
+```
+![demo](./demo.png)
 # How to develop
 First install `tox` with:
 ```shell
