@@ -4,9 +4,14 @@ import io
 import sys
 
 import setuptools
-from distutils.core import setup
+from setuptools import setup
 
-version = '0.0.6'
+def get_refined_long_descrition():
+    description = io.open('README.md', encoding='utf8').read()
+    return description
+    #return description[description.find("# conport"):]
+
+version = '1.1.4'
 
 setup(
     include_package_data=True,
@@ -19,7 +24,8 @@ setup(
         "python-jenkins",
         "url"
     ],
-    long_description=io.open('README.md', encoding='utf8').read(),
+    long_description=get_refined_long_descrition(),
+    long_description_content_type='text/markdown',
     entry_points={
         'console_scripts': [
             'conport = conport.conport:conport',
