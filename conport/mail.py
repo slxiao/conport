@@ -3,7 +3,7 @@ import smtplib
 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from email.MIMEImage import MIMEImage
+from email.mime.image import MIMEImage
 
 from .summary import get_build_summary
 from .figure import get_binary_figure

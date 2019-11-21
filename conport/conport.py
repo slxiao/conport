@@ -10,7 +10,7 @@ from . import __version__
 import sys
 if sys.version_info.major < 3:
     reload(sys)
-sys.setdefaultencoding('utf8')
+    sys.setdefaultencoding('utf8')
 
 def conport(args=None):
     parser = get_parser()

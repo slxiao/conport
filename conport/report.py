@@ -17,7 +17,7 @@ def get_template_path(report_lan):
 
 
 def get_html_output(report_lan, job_url, report_title, past_hours, build_summary, case_summary, pure_html):
-    jinja2_template_string = open(get_template_path(report_lan), 'rb').read()
+    jinja2_template_string = open(get_template_path(report_lan), 'r').read()
     template = Template(jinja2_template_string)
 
     build_metrics = {}

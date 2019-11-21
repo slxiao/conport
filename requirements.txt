@@ -2,5 +2,4 @@ configparser
 jinja2>=2.7
 matplotlib
 python-jenkins
-url
 attrdict

@@ -6,7 +6,7 @@ import sys
 import setuptools
 from setuptools import setup
 
-version = '1.1.6'
+version = '1.1.8'
 
 setup(
     include_package_data=True,
@@ -16,8 +16,7 @@ setup(
     install_requires=[
         "jinja2>=2.7",
         "matplotlib",
-        "python-jenkins",
-        "url"
+        "python-jenkins"
     ],
     long_description=io.open('README.md', encoding='utf8').read(),
     long_description_content_type='text/markdown',
@@ -27,6 +26,7 @@ setup(
         ]
     },
     url='https://github.com/slxiao/contport',
+    python_requires='>=2.6, !=3.0.*, !=3.1.*, !=3.2.*, <4',
     license='MIT',
     author='slxiao',
     author_email='shliangxiao@gmail.com',
@@ -40,6 +40,8 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     data_files=[('', ['conport/cfg.ini', 'conport/template.html'])]

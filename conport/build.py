@@ -1,5 +1,4 @@
 import jenkins
-import url
 
 from datetime import datetime, timedelta
 import time
@@ -19,10 +18,13 @@ def build_in_boundary(past_hours, timestamp):
 
 
 def get_jenkins_home(job_url):
-    myurl = url.parse(job_url)
-    if myurl.port:
-        return myurl.scheme + "://" + myurl.host + ":" + str(myurl.port)
-    return myurl.scheme + "://" + myurl.host
+    import sys
+    if sys.version_info[0] == 2:
+        from urlparse import urlparse
+    else:
+        from urllib.parse import urlparse
+    myurl = urlparse(job_url)
+    return myurl.scheme + "://" + myurl.netloc
 
 
 def get_job_name(job_url):

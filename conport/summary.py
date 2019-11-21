@@ -5,7 +5,7 @@ import collections
 
 def get_atom_reports(test_reports):
     atom_reports = []
-    for number, report in test_reports.iteritems():
+    for number, report in test_reports.items():
         suites = report['report']['suites']
         for suite in suites:
             suite_name = suite['name']
@@ -30,7 +30,7 @@ def get_merged_reports(atom_reports):
 
 
 def get_ordered_reports(merged_reports):
-    for full_name, merged in merged_reports.iteritems():
+    for full_name, merged in merged_reports.items():
         merged['suite'] = full_name.split('.')[0]
         merged['case'] = full_name.split('.')[1]
         merged['pass'] = len([i for i in merged['atoms'] if i[1] == 'PASSED'])
@@ -58,7 +58,7 @@ def get_ordered_reports(merged_reports):
 
 def get_build_summary(test_reports):
     build_summary = []
-    for number, report in test_reports.iteritems():
+    for number, report in test_reports.items():
         build = {"number": number, "pass": 0,
                  "fail": 0, "duration": round(report["duration"]/1000, 1)}
         suites = report['report']['suites']
@@ -74,8 +74,8 @@ def get_build_summary(test_reports):
 
 
 def get_case_summary(test_reports):
-    case_summary = get_ordered_reports(
-        get_merged_reports(get_atom_reports(test_reports))).values()
+    case_summary = list(get_ordered_reports(
+        get_merged_reports(get_atom_reports(test_reports))).values())
     for i in range(len(case_summary)):
         case_summary[i]["rank"] = i + 1
     return case_summary

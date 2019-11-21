@@ -7,8 +7,8 @@
 	<a href="https://travis-ci.org/slxiao/conport">
 		<img alt="Build Status" src="http://img.shields.io/travis/slxiao/conport/master.svg?style=flat-square" />
 	</a>
-	<a href="https://www.python.org/download/releases/2.7.14/">
-		<img alt="Python Version" src="https://img.shields.io/badge/python-2.7-blue.svg" />
+	<a href="https://pypi.org/project/conport/">
+		<img alt="Python Version" src="https://img.shields.io/pypi/pyversions/conport.svg" />
 	</a>
 	<a href="https://coveralls.io/github/slxiao/conport?branch=master">
 		<img alt="Coverage" src="https://coveralls.io/repos/github/slxiao/conport/badge.svg?branch=master" />
