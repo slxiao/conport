@@ -5,7 +5,12 @@ from .summary import get_case_summary
 from .report import get_html_output
 from .mail import SendEmail
 from . import __version__
+#from .fixture import test_reports
 
+import sys
+if sys.version_info.major < 3:
+    reload(sys)
+sys.setdefaultencoding('utf8')
 
 def conport(args=None):
     parser = get_parser()
@@ -22,11 +27,14 @@ def conport(args=None):
     build_summary = get_build_summary(test_reports)
     case_summary = get_case_summary(test_reports)
 
-    html_output = get_html_output(
+    html_output = get_html_output(args.report_lan, 
         args.job_url, args.report_title, args.past_hours, build_summary, case_summary, args.pure_html)
     if args.send_email == "true":
         SendEmail(args.mail_host, args.mail_user, args.mail_pwd, args.report_title, args.sender,
                   args.receivers, args.receivers_cc, html_output, build_summary, args.pure_html)
+    else:
+        with open("demo.html", "w") as f:
+            f.write((html_output))
 
 
 if __name__ == "__main__":

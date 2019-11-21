@@ -1,16 +1,23 @@
 from __future__ import division
 import datetime
 import os
+import sys
 
 from jinja2 import Template
 
 
-def get_template_path():
-    return os.path.join(os.path.abspath(os.path.dirname(__file__)), "template.html")
+def get_template_path(report_lan):
+    #TODO: merged chinese and english templates
+    if report_lan == "english":
+        return os.path.join(os.path.abspath(os.path.dirname(__file__)), "template.html")
+    elif report_lan == "chinese":
+        return os.path.join(os.path.abspath(os.path.dirname(__file__)), "template_cn.html")
+    sys.exit("unsopprted report langure: %s" % report_lan)
 
 
-def get_html_output(job_url, report_title, past_hours, build_summary, case_summary, pure_html):
-    jinja2_template_string = open(get_template_path(), 'rb').read()
+
+def get_html_output(report_lan, job_url, report_title, past_hours, build_summary, case_summary, pure_html):
+    jinja2_template_string = open(get_template_path(report_lan), 'rb').read()
     template = Template(jinja2_template_string)
 
     build_metrics = {}

@@ -33,6 +33,9 @@ def get_parser():
     parser.add_argument("--pure_html", help="pure html or not",
                         default=defaults.default.pure_html)
 
+    parser.add_argument("--report_lan", help="report langurage, english or chinese, default is english",
+                        default=defaults.default.report_lan)
+
     parser.add_argument("--version", action='store_true', help="print version")
 
     return parser

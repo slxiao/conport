@@ -50,11 +50,11 @@
 
 <body>
     <div class="container">
-        <p>Hello,</p>
+        <p>你好,</p>
         <p><b>{{report_title}}</b></p>
-        <p>Tested Jenkins job: <a href={{job_url}} target="_blank">{{job_url}}</a></p>
-        <p>Reported Time in UTC: {{now}}</p>
-        <h3>Jenkins Build Summary</h3>
+        <p>测试任务: <a href={{job_url}} target="_blank">{{job_url}}</a></p>
+        <p>报告时间(UTC): {{now}}</p>
+        <h3>Jenkins构建总结</h3>
         {% if pure_html == true %}
         <div id="chartContainer" style="height: 400px; width: 40%;"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -62,30 +62,30 @@
         <img src="cid:build_summary_image" alt="build_summary" style="height: 200px; width: 25%;"><br>
         {% endif %}
         <ul style="list-style-type:circle;">
-            <li>Test period: last <b>{{past_hours}}</b> hours</li>
-            <li>Total builds: {{build_summary|length}}, Range:
+            <li>测试周期: 过去 <b>{{past_hours}}</b> 小时</li>
+            <li>构建总量: {{build_summary|length}}, 构建范围:
                 #{{build_summary[0]["number"]}}--#{{build_summary[-1]["number"]}}</li>
-            <li>No-test-results builds:
+            <li>测试结果缺失构建:
                 {{build_summary | selectattr("fail", "equalto", 0) | list | selectattr("pass", "equalto", 0) | list|length}}
             </li>
             {% set pass_num = build_summary | selectattr("fail", "equalto", 0) | list | length %}
-            <li>Pass builds: {{pass_num}}, Pass Rate: {{((pass_num/(build_summary|length))*100)|round}}%</li>
-            <li>Average build time: {{build_metrics["avg_duration"]}} seconds, Maxinum build time:
-                {{build_metrics["max_duration"]}} seconds</li>
-            <li>Average pass build time: {{build_metrics["avg_duration_pass"]}} seconds, Maximum pass build time:
-                {{build_metrics["max_pass_duration"]}} seconds</li>
+            <li>成功构建: {{pass_num}}, 构建成功率: {{((pass_num/(build_summary|length))*100)|round}}%</li>
+            <li>平均构建时间: {{build_metrics["avg_duration"]}} 秒, 最大构建时间:
+                {{build_metrics["max_duration"]}} 秒</li>
+            <li>平均成功构建时间: {{build_metrics["avg_duration_pass"]}} 秒, 最大成功构建时间:
+                {{build_metrics["max_pass_duration"]}} 秒</li>
         </ul>
-        <h3>Test Case Summary:</h3>
-        <p>*ranked by failure rate from high to low</p>
+        <h3>测试用例总结:</h3>
+        <p>*按照失败率从高往低排序</p>
         <table border="1">
             <tr>
-                <th>Rank</th>
-                <th>Suite Name</th>
-                <th>Case Name</th>
-                <th>Result(pass/total)</th>
-                <th>Max Duration(s)</th>
-                <th>Max Pass Duration(s)</th>
-                <th>Failed Builds</th>
+                <th>名次</th>
+                <th>套件名</th>
+                <th>用例名</th>
+                <th>成功次数/总次数)</th>
+                <th>最大周期(秒)</th>
+                <th>最大成功周期(秒)</th>
+                <th>失败构建</th>
             </tr>
             {% for i in case_summary %}
             {% if i["pass"] == i["total"] %}
@@ -109,7 +109,7 @@
             </tr>
             {% endfor %}
         </table>
-        <p>BR</p>
+        <p>谢谢</p>
     </div>
 </body>
 

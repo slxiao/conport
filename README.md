@@ -20,7 +20,7 @@
 
 # conport
 
-**conport** is an Python tool for generating continuous regression testing reports. It supports both HTML report and email report. In each report, testing build trend, testing build metrics and test case summary are demonstrated. Check the [demo](#demo) as an example.
+**conport** is an Python tool for generating continuous regression testing reports. It supports both HTML report and email report. In each report, testing build trend, testing build metrics and test case summary are demonstrated. Both English report and Chinese report are supported. Check the [demo](#demo) as an example.
 
 [公众号文章](https://mp.weixin.qq.com/s/JiW-0FI5HmAHYuQecaT4vg)
 
@@ -79,6 +79,9 @@ optional arguments:
                         receivercc2, ...
   --pure_html PURE_HTML
                         pure html or not
+  --report_lan REPORT_LAN
+                        report langurage, english or chinese, default is
+                        english
   --version             print version
 ```
 The arguments, if not speficied, will be fetched from the [default configuration file](./conport/cfg.ini). Anyway, for your specific configuration, these arguments needs to be given.
@@ -93,7 +96,12 @@ You can obtain some key information from the picture:
 - Testing build metrics
 - Test case summary, with a focus on failed cases statistics
 
+**English demo**
+
 ![demo](https://github.com/slxiao/conport/blob/master/demo.png)
+
+**Chinese demo(中文示例)**
+![demo](https://github.com/slxiao/conport/blob/master/demo_cn.png)
 # How to develop
 First install `tox` with:
 ```shell
