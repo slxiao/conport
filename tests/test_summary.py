@@ -41,7 +41,7 @@ def test_get_merged_reports():
 def test_get_case_summary():
     merged_reports = {'suite1.case2': {'atoms': [
         (1, 'FAILED', 100)]}, 'suite1.case1': {'atoms': [(1, 'PASSED', 100)]}}
-    assert summary.get_ordered_reports(merged_reports).keys() == [
+    assert list(summary.get_ordered_reports(merged_reports).keys()) == [
         'suite1.case2', 'suite1.case1']
 
 

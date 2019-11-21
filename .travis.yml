@@ -14,9 +14,10 @@ addons:
 install:
   - pip install tox
   - pip install coveralls
+  - pip install tox-travis
 
 script:
-  pytest -vv -s --cov=conport --cov-report term --cov-report html
+  tox
 
 after_success:
   coveralls

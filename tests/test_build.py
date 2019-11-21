@@ -1,16 +1,14 @@
-import mock
-
 from conport import build
 
 
-@mock.patch("time.time", mock.Mock(return_value=1574066950))
-def test_get_boundary_timestamps():
+def test_get_boundary_timestamps(mocker):
+    mocker.patch("time.time", mocker.Mock(return_value=1574066950))
     assert build.get_boundary_timestamps(0) == (1574066950000, 1574066950000)
     assert build.get_boundary_timestamps(24) == (1573980550000, 1574066950000)
 
 
-@mock.patch("conport.build.get_boundary_timestamps", mock.Mock(return_value=(0, 2)))
-def test_build_in_boundary():
+def test_build_in_boundary(mocker):
+    mocker.patch("conport.build.get_boundary_timestamps", mocker.Mock(return_value=(0, 2)))
     assert build.build_in_boundary(24, 2) is False
     build.get_boundary_timestamps.assert_called_once_with(24)
     assert build.build_in_boundary(24, 1) is True
@@ -33,7 +31,7 @@ def test_get_job_name():
 
 def test_get_jenkins_instance(mocker):
     mocked_get = mocker.patch(
-        "conport.build.get_jenkins_home", mock.Mock(return_value="url"))
+        "conport.build.get_jenkins_home", mocker.Mock(return_value="url"))
     mocked_jenkins = mocker.patch("jenkins.Jenkins")
     build.get_jenkins_instance("url")
     mocked_get.assert_called_once_with("url")
